@@ -14,7 +14,7 @@ function listTodos() {
     next: ({ items, isSynced }) => {
       todos.value = items
      },
-  }); 
+  });
 }
 
 function createTodo() {
@@ -25,21 +25,38 @@ function createTodo() {
     listTodos();
   });
 }
-    
+
 // fetch todos when the component is mounted
  onMounted(() => {
   listTodos();
 });
 
+// call python function
+const helloResponse = ref<string>();
+
+async function sayhello() {
+  const { data, errors } = await client.queries.sayHello({
+    name: 'hello world!!!'
+  });
+
+  if (data) {
+    helloResponse.value = data;
+  } else if (errors) {
+    helloResponse.value = 'Error: ' + errors[0].message;
+  }
+}
+
+
+
 </script>
 
 <template>
-  <main>
+  <div>
     <h1>My todos</h1>
     <button @click="createTodo">+ new</button>
     <ul>
-      <li 
-        v-for="todo in todos" 
+      <li
+        v-for="todo in todos"
         :key="todo.id">
         {{ todo.content }}
       </li>
@@ -51,5 +68,7 @@ function createTodo() {
         Review next steps of this tutorial.
       </a>
     </div>
-  </main>
+    <div>
+    </div>
+  </div>
 </template>
