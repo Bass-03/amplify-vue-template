@@ -9,7 +9,7 @@ const router = useRouter();
 <! Components docs https://ui.docs.amplify.aws/vue/connected-components/authenticator/configuration>
 <template>
   <main>
-    <authenticator :hide-sign-up="true"> <! Disable Signup >
+    <authenticator> <! :hide-sign-up="true"> <! Disable Signup >
       <template v-slot="{ user, signOut }">
         <p>
             <strong>Current route path:</strong> {{ $route.fullPath }}
